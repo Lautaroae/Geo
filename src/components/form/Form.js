@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./FormElement.css"
 import { Link as LinkRouter } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-
+import Api from "../form/checkoutData"
 
 const Forms = () => {
     const [send, setSend] = useState(false)
@@ -137,49 +137,53 @@ const Forms = () => {
                             </div>
 
                             <p className="c">Cuotas</p>
+                            {Api.map((oneClient, index) => {
+                                return (
 
-                            <div className='input-container'>
+                                    <div className='input-container' key={index}>
 
-                                <div className="form-check" >
-                                    <label className="form-check-label" htmlFor="radio" >
-                                        <input className="form-check-input"
-                                            type="radio"
-                                            name="radio"
-                                            value="radio" />
-                                        <ul>
-                                            <li>1 cuotas de $2.000,00</li>
-                                            <li>CF:0,00%</li>
-                                            <li className='side-rigth1'>Sin interés</li>
-                                        </ul>
-                                    </label>
-                                </div>
-                                <div className="form-check">
-                                    <label className="form-check-label" htmlFor="radio">
-                                        <input className="form-check-input"
-                                            type="radio"
-                                            name="radio"
-                                            value="radio2" />
-                                        <ul>
-                                            <li>3 cuotas de $833,00</li>
-                                            <li>CF:0,80%</li>
-                                            <li className='side-rigth'>$2.500,00</li>
-                                        </ul>
-                                    </label>
-                                </div>
-                                <div className="form-check">
-                                    <label className="form-check-label" htmlFor="radio">
-                                        <input className="form-check-input"
-                                            type="radio"
-                                            name="radio"
-                                            value="radio3" />
-                                        <ul >
-                                            <li>6 cuotas de $900,00</li>
-                                            <li>CF:0,90%</li>
-                                            <li className='side-rigth'>$5.400,00</li>
-                                        </ul>
-                                    </label>
-                                </div>
-                            </div>
+                                        <div className="form-check" >
+                                            <label className="form-check-label" htmlFor="radio" >
+                                                <input className="form-check-input"
+                                                    type="radio"
+                                                    name="radio"
+                                                    value="radio" />
+                                                <ul>
+                                                    <li>1 cuotas de ${oneClient.data.installments.installmentPrice}</li>
+                                                    <li>CF:{oneClient.data.installments.financialRate}%</li>
+                                                    <li className='side-rigth'>${oneClient.data.installments.total}</li>
+                                                </ul>
+                                            </label>
+                                        </div>
+                                        <div className="form-check">
+                                            <label className="form-check-label" htmlFor="radio">
+                                                <input className="form-check-input"
+                                                    type="radio"
+                                                    name="radio"
+                                                    value="radio2" />
+                                                <ul>
+                                                    <li>3 cuotas de ${oneClient.data.installments.installmentPrice2}</li>
+                                                    <li>CF:{oneClient.data.installments.financialRate2}%</li>
+                                                    <li className='side-rigth'>${oneClient.data.installments.total2}</li>
+                                                </ul>
+                                            </label>
+                                        </div>
+                                        <div className="form-check">
+                                            <label className="form-check-label" htmlFor="radio">
+                                                <input className="form-check-input"
+                                                    type="radio"
+                                                    name="radio"
+                                                    value="radio3" />
+                                                <ul >
+                                                    <li>6 cuotas de {oneClient.data.installments.installmentPrice3}</li>
+                                                    <li>CF:{oneClient.data.installments.financialRate3}%</li>
+                                                    <li className='side-rigth'>${oneClient.data.installments.total3}</li>
+                                                </ul>
+                                            </label>
+                                        </div>
+                                    </div>
+                                )
+                            })}
 
                             <p className="dp">Datos personales</p>
 
